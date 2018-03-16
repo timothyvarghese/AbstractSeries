@@ -55,9 +55,44 @@ bool isPerfect(int n) // This is a function that checks if n is a perfect.
 	if (sum == n) return true; 
 	else return false;
 }
+// Apply is an abstract function that takes two parameters. The first is a function and 
+// the second is an integer and it returns the function applied to the integer. 
+// We are going to use it to square, cube numbers etc, while keeping the basic sum 
+// framework as abstract or generic as possible
+
+int apply(int(*f) (int), int x)
+{
+	return f(x);
+}
+
+int linear(int x)
+{
+	return x;
+}
+
+int square(int x)
+{
+	return x*x;
+}
+
+int cube(int x)
+{
+	return x*x*x;
+}
 
 int main()
 {
+	std::cout << "Enter the special number to be summed:\n";
+	
+	std::cout << "1. Primes \n";
+	std::cout << "2. Twin Primes \n";
+	std::cout << "3. Cousin Primes \n";
+	std::cout << "4. Perfect Numbers \n";
+	int response; 
+	std::cin >> response; 
+
+
+	/*
 	int max = 10;
 	int sum = 0;
 
@@ -92,11 +127,12 @@ int main()
 
 	SpecialintIterator p(2); // Create a prime iterator starting at 2
 	sum = 0; // Sum is initialized to 0
-	for (int i = 0; i < max; p.next(isTwinprime)) {
-		sum = sum + p.getSpecialInt();
+	for (int i = 0; i < max; p.next(isTwinPrime)) {
+		sum = sum + apply(square,p.getSpecialInt());
 		i++;
 		p.printSpecialInt();
 	}
 	std::cout << "The sum of the first  " << max << " special numbers is " << sum << "\n";
+	*/
 	return 0; 
 } 
