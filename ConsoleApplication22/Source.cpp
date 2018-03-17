@@ -20,6 +20,10 @@ private:
 	int position; // The current or last position of the last integer 
 }; 
 
+// Special Number detection functions. Add new special number functions  here 
+
+// isPrime Not as efficient as my earlier code which used the sieve of eratosthenes
+// but probably requires functors to remember all sieved integers
 
 bool isPrime(int n) // This is a function that checks if n is a prime.
 {
@@ -55,6 +59,9 @@ bool isPerfect(int n) // This is a function that checks if n is a perfect.
 	if (sum == n) return true; 
 	else return false;
 }
+
+
+
 // Apply is an abstract function that takes two parameters. The first is a function and 
 // the second is an integer and it returns the function applied to the integer. 
 // We are going to use it to square, cube numbers etc, while keeping the basic sum 
@@ -64,6 +71,8 @@ int apply(int(*f) (int), int x)
 {
 	return f(x);
 }
+
+// add new concrete transformations here 
 
 int linear(int x)
 {
@@ -83,16 +92,78 @@ int cube(int x)
 int main()
 {
 	std::cout << "Enter the special number to be summed:\n";
-	
+
 	std::cout << "1. Primes \n";
 	std::cout << "2. Twin Primes \n";
 	std::cout << "3. Cousin Primes \n";
 	std::cout << "4. Perfect Numbers \n";
-	int response; 
-	std::cin >> response; 
+	int specialcode;
+	std::cin >> specialcode;
+
+	bool(*specialFunction)(int); // function to tell whether an integer is special
+
+	switch (specialcode)
+	{
+	case 1:  specialFunction = isPrime;
+			 std::cout << "Special numbers being summed are primes \n";
+			 break;
+	case 2:  specialFunction = isTwinPrime;
+			 std::cout << "Special numbers being summed are twin primes \n";
+		     break;
+	case 3: specialFunction = isCousinPrime;
+			std::cout << "Special numbers being summed are cousin primes \n";
+		    break;
+	case 4: specialFunction = isPerfect;
+			std::cout << "Special numbers being summed are perfect numbers \n";
+			break; 
+	// add new special function cases here
+	default: std::cout << "Invalid special number code \n";
+	}
+
+	std::cout << "Enter the kind of transformation to be summed:\n";
+
+	std::cout << "1. Linear \n";
+	std::cout << "2. Squares \n";
+	std::cout << "3. Cubes \n";
+	int functioncode;
+	std::cin >> functioncode;
+
+	int (*transformFunction)(int); //  What transformation of special number to be summed? 
+
+	switch (functioncode)
+	{
+	case 1:  transformFunction = linear;
+		break;
+	case 2:  transformFunction = square;
+		break;
+	case 3: transformFunction = cube;
+		break;
+	// add new transformations here
+	default: std::cout << "Invalid function code \n";
+	}
+	int start;
+	std::cout << "Enter the special number to start the sequence:\n";
+	std::cin >> start;
+
+	int max ;
+	std::cout << "Enter the number of special numbers to be summed:\n";
+	std::cin >> max;
+
+	SpecialintIterator s(start); // Create a special number iterator starting at 2
+	int sum = 0; // Sum is initialized to 0
+	for (int i = 0; i < max; s.next(specialFunction)) {
+		// Go through all special numbers as indicated by special function
+		sum = sum + apply(transformFunction, s.getSpecialInt());
+		// update the sum to include the transformed special number
+		i++;
+		s.printSpecialInt(); // Print the special number
+	}
+	std::cout << "The sum of the first  " << max << " transformed special numbers is " << sum << "\n";
 
 
-	/*
+
+
+	/* concrete code, first attempts before abstracting
 	int max = 10;
 	int sum = 0;
 
