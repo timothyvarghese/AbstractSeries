@@ -67,7 +67,9 @@ bool isPerfect(int n) // This is a function that checks if n is a perfect.
 // We are going to use it to square, cube numbers etc, while keeping the basic sum 
 // framework as abstract or generic as possible
 
-int apply(int(*f) (int), int x)
+template<typename T>
+
+T apply(T (*f) (int), int x)
 {
 	return f(x);
 }
@@ -77,6 +79,11 @@ int apply(int(*f) (int), int x)
 int linear(int x)
 {
 	return x;
+}
+
+double reciprocal(int x)
+{
+	return (1.0/x);
 }
 
 int square(int x)
@@ -120,24 +127,35 @@ int main()
 	default: std::cout << "Invalid special number code \n";
 	}
 
+	bool isFloat = false; 
 	std::cout << "Enter the kind of transformation to be summed:\n";
 
 	std::cout << "1. Linear \n";
 	std::cout << "2. Squares \n";
 	std::cout << "3. Cubes \n";
+	std::cout << "4. Reciprocal \n";
 	int functioncode;
 	std::cin >> functioncode;
-
-	int (*transformFunction)(int); //  What transformation of special number to be summed? 
+	
+	int(*transformFunction)(int); //  What transformation of special number to be summed? 
+	double(*transformFunctionfloat)(int); //  What transformation of special number to be summed? 
 
 	switch (functioncode)
 	{
 	case 1:  transformFunction = linear;
-		break;
+			 std::cout << "Transformation is identity function \n";
+			 break;
 	case 2:  transformFunction = square;
-		break;
+			 std::cout << "Transformation is squaring \n";
+			 break;
 	case 3: transformFunction = cube;
-		break;
+			std::cout << "Transformation is cubing \n";
+			break;
+	case 4: transformFunctionfloat = reciprocal;
+			std::cout << "Transformation is taking reciprocals \n";
+		    isFloat = true; 
+		    break;
+
 	// add new transformations here
 	default: std::cout << "Invalid function code \n";
 	}
@@ -150,10 +168,13 @@ int main()
 	std::cin >> max;
 
 	SpecialintIterator s(start); // Create a special number iterator starting at 2
-	int sum = 0; // Sum is initialized to 0
+	double sum = 0; // Sum is initialized to 0
 	for (int i = 0; i < max; s.next(specialFunction)) {
 		// Go through all special numbers as indicated by special function
-		sum = sum + apply(transformFunction, s.getSpecialInt());
+		if (isFloat == true)
+			sum = sum + apply<double>(transformFunctionfloat, s.getSpecialInt());
+		else
+			sum = sum + apply<int>(transformFunction, s.getSpecialInt());
 		// update the sum to include the transformed special number
 		i++;
 		s.printSpecialInt(); // Print the special number
@@ -163,7 +184,7 @@ int main()
 
 
 
-	/* concrete code, first attempts before abstracting
+	/* concrete code, first attempts before abstracting, now commented out
 	int max = 10;
 	int sum = 0;
 
