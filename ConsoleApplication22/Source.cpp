@@ -18,6 +18,7 @@ public:
 	void printSpecialInt() { std::cout << "The special integer is " << position << "\n"; }
 private:
 	int position; // The current or last position of the last integer 
+
 }; 
 
 // Special Number detection functions. Add new special number functions  here 
@@ -32,6 +33,24 @@ bool isPrime(int n) // This is a function that checks if n is a prime.
 			return false;
 	return true; // if no integer divides return true
 }
+
+bool isFibonacci(int n) // This is a function that checks if n is a Fibonacci.
+{
+	int last = 1; // Create last as an int and initialize it to 1, Last Fibonacci 
+	int secondlast = 1; // This represents the second last Fibonacci number
+	int fib= 0 ; // The current Fibonacci number
+	for (int i = 1; fib < n; i++)
+	{
+		fib = last + secondlast; // The recurrence for Fibonacci
+		secondlast = last; // Update secondlast to be the last number	
+		last = fib; // Updating last to the current Fibonacci
+	}
+	if (n == fib)
+		return true; 
+	else
+		return false; 
+}
+
 
 bool isTwinPrime(int n) // This is a function that checks if n is a twin prime.
 {
@@ -104,6 +123,7 @@ int main()
 	std::cout << "2. Twin Primes \n";
 	std::cout << "3. Cousin Primes \n";
 	std::cout << "4. Perfect Numbers \n";
+	std::cout << "5. Fibonacci Numbers \n "; 
 	int specialcode;
 	std::cin >> specialcode;
 
@@ -122,6 +142,9 @@ int main()
 		    break;
 	case 4: specialFunction = isPerfect;
 			std::cout << "Special numbers being summed are perfect numbers \n";
+			break; 
+	case 5: specialFunction = isFibonacci; 
+			std::cout << "Special numbers being summed are Fibonacci numbers \n "; 
 			break; 
 	// add new special function cases here
 	default: std::cout << "Invalid special number code \n";
