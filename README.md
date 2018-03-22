@@ -57,7 +57,7 @@ v5:  Added user input to choose special number (e.g., prime, perfect etc)
          keep track of the last two Fibonacci numbers within isFibonacci.  Now, the running time for the sum of the first 
          48 Fibonacci numbers goes down to 99 seconds
          
-   Future: The code is still too slow for both Fibonacci and for primes. For Fibonacci, a future version would jump 
+   FUTURE WORK: The code is still too slow for both Fibonacci and for primes. For Fibonacci, a future version would jump 
    directly to the next Fibonacci number without incrementing the integers one at a time. This would require redefining 
    the increment operator. The prime code is also too slow and needs to be rewritten using the sieve of Eratosthenes.
    Should be easy to add alternating sums to the main loop by keeping a sign variable that stays one for positive sums
