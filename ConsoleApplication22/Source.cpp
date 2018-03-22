@@ -37,19 +37,35 @@ bool isPrime(unsigned long long n) // This is a function that checks if n is a p
 
 bool isFibonacci(unsigned long long n) // This is a function that checks if n is a Fibonacci.
 {
-	unsigned long long last = 1; // Create last as an int and initialize it to 1, Last Fibonacci 
-	unsigned long long secondlast = 1; // This represents the second last Fibonacci number
-	unsigned long long fib= 0 ; // The current Fibonacci number
+	static unsigned long long last = 1; // Create last as an int and initialize it to 1, Last Fibonacci 
+	static unsigned long long temp = 1; // This represents the second last Fibonacci number
+	static unsigned long long fib= 2; // The current Fibonacci number
+	if (n == fib) // n is a fibonacci number
+	{
+		temp = last; // temp remembers old value of last
+		// debug: std::cout << "Value of temp for Fib is " << temp << "\n";
+		last = fib; // Updating last to the current Fibonacci
+		// std::cout << "Value of last for Fib is " << last << "\n";
+		fib = temp + fib; // The recurrence for next Fibonacci
+		// std::cout << "Value of fib for Fib is " << fib << "\n";
+		return true; // After computing the next Fibonacci number
+	}
+	else
+		return false; 
+	/*
+	Comment out old stateless Fibonacci code
 	for (unsigned long long i = 1; fib < n; i++)
 	{
 		fib = last + secondlast; // The recurrence for Fibonacci
 		secondlast = last; // Update secondlast to be the last number	
 		last = fib; // Updating last to the current Fibonacci
 	}
+
 	if (n == fib)
 		return true; 
 	else
 		return false; 
+*/
 }
 
 
@@ -192,19 +208,20 @@ int main()
 	std::cout << "Enter the number of special numbers to be summed:\n";
 	std::cin >> max;
 
-	SpecialintIterator s(start); // Create a special number iterator starting at 2
+	SpecialintIterator s(start); // Create a special number iterator starting at start
 	unsigned long long sum = 0; // Sum is initialized to 0
+	double sumdouble = 0; // sum for floats
 	for (unsigned long long i = 0; i < max; s.next(specialFunction)) {
 		// Go through all special numbers as indicated by special function
 		if (isFloat == true)
-			sum = sum + apply<double>(transformFunctionfloat, s.getSpecialInt());
+			sumdouble = sumdouble + apply<double>(transformFunctionfloat, s.getSpecialInt());
 		else
 			sum = sum + apply<unsigned long long>(transformFunction, s.getSpecialInt());
 		// update the sum to include the transformed special number
 		i++;
 		s.printSpecialInt(); // Print the special number
 	}
-	std::cout << "The sum of the first  " << max << " transformed special numbers is " << sum << "\n";
+	std::cout << "The sum of the first  " << max << " transformed special numbers is " << (isFloat? sumdouble: sum )<< "\n";
 
 
 	/* concrete code, first attempts before abstracting, now commented out
