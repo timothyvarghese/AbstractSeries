@@ -15,6 +15,8 @@ BUGS/LIMITATIONS: User must enter start as a correct special number.  For exampl
               Sum of first three twin primes= 3 + 5+ 11= 19
               Sum of first four Fibonacci numbers= 1 + 2 + 3 + 5= 11
               
+ ADDING FUNCTIONALITY: There are comments in the code to indicate where to add new special numbers and where to add new 
+   Transformations which should make this code easy to extend.          
 
 HISTORY OF COMMITS:
 
@@ -47,7 +49,8 @@ v5:  Added user input to choose special number (e.g., prime, perfect etc)
     
   v9: Added time measurement to check using the function clock() and time.h following some code in Stack Overflow
       Found the following numbers for Fibonacci sums of the first N fibonacci.  N = 10 was 3.12, N = 40 was 60 seconds
-      but N = 48 took over 10 minutes. The running time is growing too fast because every call to isFibonacci starts computing      Fibonacci Numbers starting from 1
+      but N = 48 took over 10 minutes. The running time is growing too fast because every call to isFibonacci starts 
+      computing Fibonacci Numbers starting from 1
   
   v10:  Tried to keep state within the Fibonacci function to remember the last Fibonacci number using Functors and Lamdas
          Did not figure out how to pass a function pointer to a functor.  Finally, settled for using static variables to 
@@ -57,11 +60,9 @@ v5:  Added user input to choose special number (e.g., prime, perfect etc)
    Future: The code is still too slow for both Fibonacci and for primes. For Fibonacci, a future version would jump 
    directly to the next Fibonacci number without incrementing the integers one at a time. This would require redefining 
    the increment operator. The prime code is also too slow and needs to be rewritten using the sieve of Eratosthenes.
+   Should be easy to add alternating sums to the main loop by keeping a sign variable that stays one for positive sums
    
-   Should be easy to add alternating sums.
-   
-   There are comments in the code to indicate where to add new special numbers and where to add new Transformations 
-   which should make this code easy to extend. 
+   . 
   
          
          
