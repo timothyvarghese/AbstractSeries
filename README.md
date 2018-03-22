@@ -4,9 +4,8 @@ DESCRIPTION: Want to create abstract code to sum across various functions of
 various special numbers like primes, perfect numbers, fibonacci numbers 
 
 
-BUGS/LIMITATIONS: User must enter start as a correct special number.  For example, if user enters 2 for first twin prime, the sum
-         will be incorrect but it will be correct for primes.  Usershould enter 3 for first twin prime or can start at any valid
-         twin prime.  For twin primes like 3 and 5, we considered only 3 to be a twin prime.
+BUGS/LIMITATIONS: User must enter the starting number as a correct special number.  For example, if user enters 2 for first twin prime, the sum will be incorrect but it will be correct for primes.  The usershould enter 3 for first twin prime or can start at any valid
+twin prime.  For twin prime oairslike 3 and 5, we considered only 3 (the first in the pair) to be a twin prime.
          
  TEST CASES: Linear sum of first 3 primes= 2 +3 + 5= 10 
               Sum of first 3 primes squares= 4 +9 +35= 38
