@@ -46,15 +46,8 @@ v5:  Added user input to choose special number (e.g., prime, perfect etc)
      Corrected many type mismatches in functions to make this change work
     
   v9: Added time measurement to check using the function clock() and time.h following some code in Stack Overflow
-      Found the following numbers for Fibonacci sums of the first N fibonacci
-      N                                       Running Time (seconds)
-      10                                       3.12
-      20                                       12.46
-      30                                        17.599
-      40                                        55 
-      48                                     > 10 minutes
-      
-      The running time is growing too fast because every call to isFibonacci starts computing Fibonacci Numbers starting from 1
+      Found the following numbers for Fibonacci sums of the first N fibonacci.  N = 10 was 3.12, N = 40 was 60 seconds
+      but N = 48 took over 10 minutes. The running time is growing too fast because every call to isFibonacci starts computing      Fibonacci Numbers starting from 1
   
   v10:  Tried to keep state within the Fibonacci function to remember the last Fibonacci number using Functors and Lamdas
          Did not figure out how to pass a function pointer to a functor.  Finally, settled for using static variables to 
